@@ -1,0 +1,8 @@
+{
+  "glc:power_battery": {
+    "sound": "lantern"
+  },
+  "glc:hardlight": {
+    "sound": "glass"
+  }
+}

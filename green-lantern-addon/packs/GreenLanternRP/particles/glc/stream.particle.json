@@ -1,0 +1,59 @@
+{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "glc:stream",
+      "basic_render_parameters": {
+        "material": "particles_add",
+        "texture": "textures/glc/particle/glow"
+      }
+    },
+    "components": {
+      "minecraft:emitter_rate_steady": {
+        "spawn_rate": 40,
+        "max_particles": 60
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 0.5
+      },
+      "minecraft:emitter_shape_point": {},
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": 0.6
+      },
+      "minecraft:particle_motion_parametric": {
+        "relative_position": [
+          "variable.beam.direction_x * variable.beam.speed * (variable.particle_age / variable.particle_lifetime) + math.sin(variable.particle_age * 900 + variable.particle_random_1 * 360) * 0.25 * (1 - variable.particle_age / variable.particle_lifetime)",
+          "variable.beam.direction_y * variable.beam.speed * (variable.particle_age / variable.particle_lifetime) + math.cos(variable.particle_age * 900 + variable.particle_random_1 * 360) * 0.25 * (1 - variable.particle_age / variable.particle_lifetime)",
+          "variable.beam.direction_z * variable.beam.speed * (variable.particle_age / variable.particle_lifetime) + math.sin(variable.particle_age * 900 + variable.particle_random_1 * 360) * 0.25 * (1 - variable.particle_age / variable.particle_lifetime)"
+        ]
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          "0.14 + variable.particle_random_3 * 0.08",
+          "0.14 + variable.particle_random_3 * 0.08"
+        ],
+        "facing_camera_mode": "lookat_xyz",
+        "uv": {
+          "texture_width": 32,
+          "texture_height": 32,
+          "uv": [
+            0,
+            0
+          ],
+          "uv_size": [
+            32,
+            32
+          ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          "math.min(1, variable.color.r * 1.2)",
+          "math.min(1, variable.color.g * 1.2)",
+          "math.min(1, variable.color.b * 1.2)",
+          "1"
+        ]
+      }
+    }
+  }
+}

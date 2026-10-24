@@ -1,0 +1,58 @@
+{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "glc:dissipate",
+      "basic_render_parameters": {
+        "material": "particles_add",
+        "texture": "textures/glc/particle/spark"
+      }
+    },
+    "components": {
+      "minecraft:emitter_rate_instant": {
+        "num_particles": 16
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 0.05
+      },
+      "minecraft:emitter_shape_point": {},
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": "math.random(0.4, 0.8)"
+      },
+      "minecraft:particle_motion_parametric": {
+        "relative_position": [
+          "math.cos(variable.particle_random_2 * 180 - 90) * math.cos(variable.particle_random_1 * 360) * variable.radius * (0.3 + (variable.particle_age / variable.particle_lifetime))",
+          "math.sin(variable.particle_random_2 * 180 - 90) * variable.radius * (0.3 + (variable.particle_age / variable.particle_lifetime)) + (variable.particle_age / variable.particle_lifetime) * 0.6",
+          "math.cos(variable.particle_random_2 * 180 - 90) * math.sin(variable.particle_random_1 * 360) * variable.radius * (0.3 + (variable.particle_age / variable.particle_lifetime))"
+        ]
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          "0.14 * (1 - variable.particle_age / variable.particle_lifetime) + 0.02",
+          "0.14 * (1 - variable.particle_age / variable.particle_lifetime) + 0.02"
+        ],
+        "facing_camera_mode": "lookat_xyz",
+        "uv": {
+          "texture_width": 16,
+          "texture_height": 16,
+          "uv": [
+            0,
+            0
+          ],
+          "uv_size": [
+            16,
+            16
+          ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          "variable.color.r",
+          "variable.color.g",
+          "variable.color.b",
+          "(1 - variable.particle_age / variable.particle_lifetime)"
+        ]
+      }
+    }
+  }
+}

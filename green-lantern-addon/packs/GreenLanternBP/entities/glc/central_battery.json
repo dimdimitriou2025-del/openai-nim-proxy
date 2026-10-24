@@ -1,0 +1,73 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "glc:central_battery",
+      "is_spawnable": false,
+      "is_summonable": true
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "glc_battery",
+          "inanimate"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 2.6,
+        "height": 3.2
+      },
+      "minecraft:health": {
+        "value": 500,
+        "max": 500
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:persistent": {},
+      "minecraft:fire_immune": {},
+      "minecraft:is_collidable": {},
+      "minecraft:breathable": {
+        "breathes_air": true,
+        "breathes_water": true,
+        "suffocate_time": -1
+      },
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "on_interact": {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "player"
+              },
+              "event": "glc:battery_interact",
+              "target": "self"
+            },
+            "interact_text": "action.interact.glc.battery",
+            "swing": true
+          }
+        ]
+      }
+    },
+    "events": {
+      "glc:battery_interact": {}
+    }
+  }
+}

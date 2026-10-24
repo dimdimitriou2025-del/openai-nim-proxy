@@ -1,0 +1,273 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.glc.blade",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 7,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "swing",
+          "parent": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                -1.5,
+                0
+              ],
+              "size": [
+                3,
+                3,
+                8
+              ],
+              "uv": [
+                71,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -7,
+                -2,
+                -2
+              ],
+              "size": [
+                14,
+                4,
+                2
+              ],
+              "uv": [
+                94,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -2.5,
+                -0.5,
+                -40
+              ],
+              "size": [
+                5,
+                1,
+                38
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -1.5,
+                -0.5,
+                -44
+              ],
+              "size": [
+                3,
+                1,
+                4
+              ],
+              "uv": [
+                13,
+                77
+              ]
+            },
+            {
+              "origin": [
+                -0.5,
+                -1,
+                -38
+              ],
+              "size": [
+                1,
+                2,
+                34
+              ],
+              "uv": [
+                0,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                -2,
+                8
+              ],
+              "size": [
+                4,
+                4,
+                2
+              ],
+              "uv": [
+                0,
+                77
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": {
+        "identifier": "geometry.glc.blade_glow",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 7,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "swing",
+          "parent": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                -1.5,
+                0
+              ],
+              "size": [
+                3,
+                3,
+                8
+              ],
+              "inflate": 0.45,
+              "uv": [
+                71,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -7,
+                -2,
+                -2
+              ],
+              "size": [
+                14,
+                4,
+                2
+              ],
+              "inflate": 0.45,
+              "uv": [
+                94,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -2.5,
+                -0.5,
+                -40
+              ],
+              "size": [
+                5,
+                1,
+                38
+              ],
+              "inflate": 0.45,
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -1.5,
+                -0.5,
+                -44
+              ],
+              "size": [
+                3,
+                1,
+                4
+              ],
+              "inflate": 0.45,
+              "uv": [
+                13,
+                77
+              ]
+            },
+            {
+              "origin": [
+                -0.5,
+                -1,
+                -38
+              ],
+              "size": [
+                1,
+                2,
+                34
+              ],
+              "inflate": 0.45,
+              "uv": [
+                0,
+                40
+              ]
+            },
+            {
+              "origin": [
+                -2,
+                -2,
+                8
+              ],
+              "size": [
+                4,
+                4,
+                2
+              ],
+              "inflate": 0.45,
+              "uv": [
+                0,
+                77
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

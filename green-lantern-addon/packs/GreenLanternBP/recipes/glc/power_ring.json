@@ -1,0 +1,36 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "glc:power_ring"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " E ",
+      "G#G",
+      " G "
+    ],
+    "key": {
+      "E": {
+        "item": "minecraft:emerald"
+      },
+      "#": {
+        "item": "minecraft:ender_eye"
+      },
+      "G": {
+        "item": "minecraft:gold_ingot"
+      }
+    },
+    "unlock": [
+      {
+        "item": "minecraft:emerald"
+      }
+    ],
+    "result": {
+      "item": "glc:power_ring",
+      "count": 1
+    }
+  }
+}

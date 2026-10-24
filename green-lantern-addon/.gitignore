@@ -1,0 +1,5 @@
+# local tooling
+tools/typecheck/node_modules/
+__pycache__/
+*.pyc
+.audio_cache/

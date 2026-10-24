@@ -1,0 +1,26 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "glc:corps_uniform",
+      "item": {
+        "glc:corps_uniform": "query.owner_identifier == 'minecraft:player'"
+      },
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/glc/entity/lanterns/corps_uniform"
+      },
+      "geometry": {
+        "default": "geometry.glc.suit"
+      },
+      "scripts": {
+        "parent_setup": "variable.chest_layer_visible = 0.0; variable.leg_layer_visible = 0.0; variable.boot_layer_visible = 0.0;"
+      },
+      "render_controllers": [
+        "controller.render.glc.suit"
+      ]
+    }
+  }
+}

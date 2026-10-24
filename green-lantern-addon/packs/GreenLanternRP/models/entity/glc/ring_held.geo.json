@@ -1,0 +1,329 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.glc.ring_held",
+        "texture_width": 32,
+        "texture_height": 32,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "ring",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "binding": "q.item_slot_to_bone_name(c.item_slot)"
+        },
+        {
+          "name": "ring_float",
+          "parent": "ring",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                3,
+                -1.5
+              ],
+              "size": [
+                3,
+                1,
+                3
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -1,
+                4,
+                -1
+              ],
+              "size": [
+                2,
+                1,
+                2
+              ],
+              "uv": [
+                13,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_0",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                22,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_1",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            45
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_2",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                7,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_3",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            135
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                14,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_4",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            180
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                21,
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_5",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            225
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                0,
+                8
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_6",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            270
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                7,
+                8
+              ]
+            }
+          ]
+        },
+        {
+          "name": "band_7",
+          "parent": "ring_float",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            315
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                2,
+                -0.5
+              ],
+              "size": [
+                2,
+                1,
+                1
+              ],
+              "uv": [
+                14,
+                8
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

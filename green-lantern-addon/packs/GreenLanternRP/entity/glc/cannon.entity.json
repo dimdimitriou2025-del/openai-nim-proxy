@@ -1,0 +1,46 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "glc:cannon",
+      "materials": {
+        "core": "entity_emissive_alpha",
+        "glow": "charged_creeper"
+      },
+      "textures": {
+        "green": "textures/glc/entity/constructs/cannon",
+        "shimmer_green": "textures/glc/entity/constructs/shimmer_green",
+        "yellow": "textures/glc/entity/constructs/cannon_yellow",
+        "shimmer_yellow": "textures/glc/entity/constructs/shimmer_yellow"
+      },
+      "geometry": {
+        "default": "geometry.glc.cannon",
+        "glow": "geometry.glc.cannon_glow"
+      },
+      "animations": {
+        "grow": "animation.glc.construct.grow",
+        "dissolve": "animation.glc.construct.dissolve",
+        "state": "controller.animation.glc.construct.state",
+        "pitch": "animation.glc.construct.pitch",
+        "cannon_recoil": "animation.glc.cannon.recoil"
+      },
+      "scripts": {
+        "pre_animation": [
+          "v.size = q.property('glc:size');",
+          "v.grow = math.min(q.life_time / 0.22, 1.0);",
+          "v.grow = v.grow < 1.0 ? v.grow * (1.25 - 0.25 * v.grow) : 1.0;"
+        ],
+        "animate": [
+          "state",
+          "pitch",
+          "cannon_recoil"
+        ],
+        "should_update_bones_and_effects_offscreen": "1.0"
+      },
+      "render_controllers": [
+        "controller.render.glc.construct_core",
+        "controller.render.glc.construct_glow"
+      ]
+    }
+  }
+}

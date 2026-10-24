@@ -1,0 +1,13 @@
+{
+  "name": "glc-typecheck",
+  "private": true,
+  "description": "Type-checks the add-on scripts against the exact Script API versions declared in the manifest.",
+  "scripts": {
+    "check": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@minecraft/server": "2.6.0",
+    "@minecraft/server-ui": "2.0.0",
+    "typescript": "5.9.3"
+  }
+}

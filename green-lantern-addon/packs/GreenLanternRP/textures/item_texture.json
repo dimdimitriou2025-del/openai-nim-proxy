@@ -1,0 +1,48 @@
+{
+  "resource_pack_name": "glc",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "glc_power_ring": {
+      "textures": "textures/glc/items/power_ring"
+    },
+    "glc_central_battery": {
+      "textures": "textures/glc/items/central_battery"
+    },
+    "glc_book_of_oa": {
+      "textures": "textures/glc/items/book_of_oa"
+    },
+    "glc_corps_uniform": {
+      "textures": "textures/glc/items/corps_uniform"
+    },
+    "glc_suit_hal": {
+      "textures": "textures/glc/items/suit_hal"
+    },
+    "glc_suit_john": {
+      "textures": "textures/glc/items/suit_john"
+    },
+    "glc_suit_guy": {
+      "textures": "textures/glc/items/suit_guy"
+    },
+    "glc_suit_kyle": {
+      "textures": "textures/glc/items/suit_kyle"
+    },
+    "glc_suit_sinestro": {
+      "textures": "textures/glc/items/suit_sinestro"
+    },
+    "glc_egg_hal_jordan": {
+      "textures": "textures/glc/items/egg_hal_jordan"
+    },
+    "glc_egg_john_stewart": {
+      "textures": "textures/glc/items/egg_john_stewart"
+    },
+    "glc_egg_guy_gardner": {
+      "textures": "textures/glc/items/egg_guy_gardner"
+    },
+    "glc_egg_kyle_rayner": {
+      "textures": "textures/glc/items/egg_kyle_rayner"
+    },
+    "glc_egg_sinestro": {
+      "textures": "textures/glc/items/egg_sinestro"
+    }
+  }
+}

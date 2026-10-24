@@ -1,0 +1,31 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:item": {
+    "description": {
+      "identifier": "glc:power_ring",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": "glc_power_ring",
+      "minecraft:display_name": {
+        "value": "item.glc:power_ring.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:allow_off_hand": true,
+      "minecraft:hand_equipped": false,
+      "minecraft:rarity": "epic",
+      "minecraft:interact_button": "action.interact.glc.use_ring",
+      "minecraft:fire_resistant": {
+        "value": true
+      },
+      "minecraft:tags": {
+        "tags": [
+          "glc:power_ring"
+        ]
+      },
+      "glc:power_ring": {}
+    }
+  }
+}

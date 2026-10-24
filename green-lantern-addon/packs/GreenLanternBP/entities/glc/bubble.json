@@ -1,0 +1,121 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "glc:bubble",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "properties": {
+        "glc:state": {
+          "type": "int",
+          "range": [
+            0,
+            3
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "glc:corps": {
+          "type": "int",
+          "range": [
+            0,
+            8
+          ],
+          "default": 0,
+          "client_sync": true
+        },
+        "glc:size": {
+          "type": "float",
+          "range": [
+            0.1,
+            16.0
+          ],
+          "default": 1.0,
+          "client_sync": true
+        },
+        "glc:pitch": {
+          "type": "float",
+          "range": [
+            -90.0,
+            90.0
+          ],
+          "default": 0.0,
+          "client_sync": true
+        }
+      }
+    },
+    "component_groups": {
+      "glc:despawn": {
+        "minecraft:instant_despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "glc_construct",
+          "inanimate"
+        ]
+      },
+      "minecraft:collision_box": {
+        "width": 0.4,
+        "height": 0.4
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 1000,
+        "max": 1000
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:fire_immune": {},
+      "minecraft:breathable": {
+        "breathes_air": true,
+        "breathes_water": true,
+        "breathes_solids": true,
+        "suffocate_time": -1,
+        "total_supply": 15
+      },
+      "minecraft:timer": {
+        "looping": false,
+        "time": 30,
+        "randomInterval": false,
+        "time_down_event": {
+          "event": "glc:despawn",
+          "target": "self"
+        }
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+        "default_values": {
+          "max_optimized_distance": 80.0,
+          "max_dropped_ticks": 0,
+          "use_motion_prediction_hints": true
+        }
+      }
+    },
+    "events": {
+      "glc:despawn": {
+        "add": {
+          "component_groups": [
+            "glc:despawn"
+          ]
+        }
+      }
+    }
+  }
+}

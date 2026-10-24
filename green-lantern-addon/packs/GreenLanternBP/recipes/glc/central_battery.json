@@ -1,0 +1,36 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "glc:central_battery"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "BGB",
+      "GPG",
+      "BGB"
+    ],
+    "key": {
+      "B": {
+        "item": "minecraft:emerald_block"
+      },
+      "G": {
+        "item": "minecraft:gold_block"
+      },
+      "P": {
+        "item": "glc:power_battery"
+      }
+    },
+    "unlock": [
+      {
+        "item": "glc:power_battery"
+      }
+    ],
+    "result": {
+      "item": "glc:central_battery",
+      "count": 1
+    }
+  }
+}
