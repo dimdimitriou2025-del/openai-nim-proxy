@@ -44,8 +44,8 @@ export function startFlight(player, quiet = false) {
   } catch {
     // ignore
   }
+  r.posed = false; // the pose starts once airborne (see flightTick)
   sound(player.dimension, "glc.flight_start", player.location, 0.9);
-  flightPose(player, true);
   particle(player.dimension, "glc:ring_burst", add(player.location, v3(0, 0.2, 0)), corpsOf(player));
   if (!quiet) toast(player, "§aFlight ON §7- joystick to fly where you look, jump to climb, double-jump to land", 60);
   return true;
@@ -59,6 +59,7 @@ export function stopFlight(player, reason = "") {
   r.safeFallUntil = system.currentTick + SAFE_FALL_TICKS;
   sound(player.dimension, "glc.flight_stop", player.location, 0.8);
   flightPose(player, false);
+  r.posed = false;
   if (reason) toast(player, reason, 50);
 }
 
@@ -147,6 +148,13 @@ export function flightTick(player, tick) {
     // ignore
   }
   r.safeFallUntil = tick + SAFE_FALL_TICKS;
+
+  // superhero pose: the client ends it on touching ground or water, so restart it on take-off
+  if (player.isOnGround || player.isInWater) r.posed = false;
+  else if (!r.posed) {
+    flightPose(player, true);
+    r.posed = true;
+  }
 
   // emerald trail
   if (moving && tick % 2 === 0) particle(player.dimension, "glc:trail", add(loc, v3(0, 0.5, 0)), corpsOf(player));

@@ -1,7 +1,6 @@
 // Tunable constants for the gameplay scripts.  Balance numbers for constructs
 // and ranks live in data/game_data.js (generated from tools/content/game_data.py).
 
-export const NS = "glc";
 export const RING_ID = "glc:power_ring";
 export const BOOK_ID = "glc:book_of_oa";
 export const BATTERY_BLOCK_ID = "glc:power_battery";
@@ -42,7 +41,6 @@ export const MAX_ACTIVE_CONSTRUCTS_TOTAL = 40;
 export const MAX_ALLIES_PER_PLAYER = 1;
 
 // --- XP
-export const XP_PER_DAMAGE = 0.25;
 export const XP_KILL_MULTIPLIER = 0.5;
 export const XP_KILL_MIN = 3;
 export const XP_KILL_MAX = 40;

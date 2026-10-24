@@ -39,10 +39,14 @@ function ownerId(e) {
 export function summonAlly(player, charId) {
   const ch = CHARACTERS.find((c) => c.id === charId);
   if (!ch) return;
-  // send existing allies home
+  // send existing allies home; Sinestro (an unbound rival) never appears twice nearby
   if (ch.ally) {
     for (const e of player.dimension.getEntities({ families: ["glc_lantern"] })) {
       if (ownerId(e) === player.id && MAX_ALLIES_PER_PLAYER <= 1) dismiss(e, true);
+    }
+  } else {
+    for (const e of player.dimension.getEntities({ type: `glc:${ch.id}`, location: player.location, maxDistance: 96 })) {
+      dismiss(e, true);
     }
   }
   const loc = add(player.location, add(v3(0, 1.5, 0), (() => {
@@ -76,6 +80,7 @@ function bind(e, player) {
   try {
     e.setDynamicProperty(OWNER_KEY, player.id);
     e.getComponent("minecraft:tameable")?.tame(player);
+    e.triggerEvent("glc:on_tame"); // follow_owner group, even if tame() did not run the tame event
   } catch (err) {
     console.warn(`[GLC] bind ally: ${err}`);
   }
@@ -122,8 +127,8 @@ async function talk(player, npc, ch) {
       player.sendMessage(`${color}<${ch.name}>§r You got it, Lantern.`);
     });
   }
-  if (mine) {
-    f.button("§l§cSend home\n§r§8Dismiss this Lantern", "textures/glc/ui/ui_back");
+  if (mine || !ch.ally) {
+    f.button(mine ? "§l§cSend home\n§r§8Dismiss this Lantern" : "§l§eSend him away\n§r§8He leaves this place", "textures/glc/ui/ui_back");
     actions.push(() => dismiss(npc));
   }
   f.button("§0Close", "textures/glc/ui/ui_back");

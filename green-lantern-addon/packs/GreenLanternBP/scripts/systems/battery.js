@@ -62,7 +62,9 @@ function chargeFrom(player, source, fill, onDone) {
 
 function batteryXp(player) {
   const d = data(player);
-  if (system.currentTick - d.lastBatteryXp >= BATTERY_XP_COOLDOWN_TICKS) {
+  // ticks restart at every world load, so a stored tick from an earlier session reads as "long ago"
+  const since = system.currentTick - d.lastBatteryXp;
+  if (since < 0 || since >= BATTERY_XP_COOLDOWN_TICKS) {
     d.lastBatteryXp = system.currentTick;
     addXp(player, BATTERY_XP);
     save(player);

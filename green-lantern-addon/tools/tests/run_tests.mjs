@@ -362,14 +362,15 @@ await test("flight: double-tap jump toggles, joystick flies, energy drains, land
   press();
   await tick(1);
   assert.equal(state.rt(p.id).flying, true, "flying after double tap");
-  const pose = log.animations.filter((a) => a.entity === p.id && a.controller === "glc:flight");
-  assert.equal(pose.at(-1)?.name, "animation.glc.player.flight", "flight pose started");
-  assert.ok(pose.at(-1).stopExpression.includes("q.is_on_ground"), "pose ends by itself on landing");
   p.location = { x: 0.5, y: 70, z: 0.5 };
   p.move = { x: 0, y: 1 };
   p.knockbacks.length = 0;
   const e0 = D().energy + D().over;
   await tick(60);
+  const pose = log.animations.filter((a) => a.entity === p.id && a.controller === "glc:flight");
+  assert.equal(pose.length, 1, "flight pose started once while airborne");
+  assert.equal(pose[0].name, "animation.glc.player.flight");
+  assert.ok(pose[0].stopExpression.includes("q.is_on_ground"), "pose ends by itself on landing");
   assert.ok(p.knockbacks.length >= 55, "knockback every tick");
   assert.ok(p.knockbacks.at(-1).z > 0.2, "moving forward (+Z)");
   assert.ok(D().energy + D().over < e0, "energy drained");
@@ -539,6 +540,27 @@ await test("talking to an unbound Lantern can recruit them", async () => {
   world.afterEvents.playerInteractWithEntity.fire({ player: p, target: kyle });
   await tick(4);
   assert.equal(kyle.tamedTo, p.id);
+});
+
+await test("Sinestro (rank 5) arrives once as a neutral rival and can be sent away", async () => {
+  reg.commands["glc:rank"].cb({ sourceEntity: p }, 5);
+  await tick(2);
+  for (let i = 0; i < 2; i++) {
+    UI.reset();
+    UI.respond({ selection: 4 }); // Call a Lantern Ally
+    UI.respond({ selection: 4 }); // Sinestro (after Hal, John, Guy, Kyle)
+    world.afterEvents.playerInteractWithEntity.fire({ player: p, target: battery });
+    await tick(12);
+  }
+  const all = dim.getEntities({ type: "glc:sinestro" });
+  assert.equal(all.length, 1, "only one Sinestro");
+  const sin = all[0];
+  assert.equal(sin.getDynamicProperty("glc:owner"), undefined, "not bound to the player");
+  UI.reset();
+  UI.respond({ selection: 0 }); // Send him away
+  world.afterEvents.playerInteractWithEntity.fire({ player: p, target: sin });
+  await tick(6);
+  assert.equal(sin.isValid, false, "Sinestro left");
 });
 
 await test("ring menu, categories, selection and settings work", async () => {

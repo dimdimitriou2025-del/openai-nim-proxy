@@ -58,19 +58,25 @@ def build_models():
     """Construct + other models with matching textures. Returns dict for icons/previews."""
     out = {}
     ct = "textures/glc/entity/constructs/"
+    if rp_defs.TEXTURED_CORPS[:1] != ["green"]:
+        raise SystemExit("game_data.CORPS must start with the active green Corps (glc:corps index 0)")
+    missing = [c for c in rp_defs.TEXTURED_CORPS if c not in paint.CORPS]
+    if missing:
+        raise SystemExit(f"active Corps without a palette in tools/glc/paint.py CORPS: {missing}")
     for name, fn in cm.ALL.items():
         geo = fn()
         style = cm.STYLE.get(name, "solid")
         green = tex_for(geo)
         io.save_png(green, io.rp(ct + name + ".png"))
-        yellow = paint.recolor_hue(green, paint.CORPS["yellow"]["hue"], paint.CORPS["green"]["hue"])
-        io.save_png(yellow, io.rp(ct + name + "_yellow.png"))
+        for corps in rp_defs.TEXTURED_CORPS[1:]:
+            tinted = paint.recolor_hue(green, paint.CORPS[corps]["hue"], paint.CORPS["green"]["hue"])
+            io.save_png(tinted, io.rp(ct + f"{name}_{corps}.png"))
         geos = [geo]
         if style == "solid":
             geos.append(glow_shell(geo))
         io.write_json(io.rp("models", "entity", "glc", f"{name}.geo.json"), geometry_file(*geos))
         out[name] = (geo, green, style)
-    for corps in ("green", "yellow"):
+    for corps in rp_defs.TEXTURED_CORPS:
         io.save_png(paint.seamless_streaks(64, corps), io.rp(ct + f"shimmer_{corps}.png"))
 
     # personal power battery (block)

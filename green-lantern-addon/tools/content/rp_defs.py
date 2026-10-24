@@ -1,7 +1,17 @@
 """Resource-pack JSON: client entities, render controllers, animations, attachables."""
-from content.game_data import CHARACTERS, SUITS
+from content.game_data import CHARACTERS, CORPS, SUITS
 
-CORPS_VARIANTS = ["green", "yellow"]  # texture variant index == glc:corps property
+# Texture arrays hold one entry per Corps in game_data.CORPS order, the same order the scripts
+# use for the glc:corps entity property.  Corps that are not active yet reuse green textures,
+# so activating one later never shifts the indices.
+CORPS_IDS = [c["id"] for c in CORPS]
+TEXTURED_CORPS = [c["id"] for c in CORPS if c["active"]]
+
+
+def corps_variant(corps):
+    return corps if corps in TEXTURED_CORPS else "green"
+
+
 CT = "textures/glc/entity/constructs/"
 
 # entity id -> (geometry key, style, extra animations)
@@ -24,7 +34,7 @@ PROJECTILES = {"energy_bolt": "bolt", "missile": "missile"}
 
 def construct_client(name, geo_key, style, extras):
     textures = {}
-    for v in CORPS_VARIANTS:
+    for v in TEXTURED_CORPS:
         textures[v] = CT + (geo_key if v == "green" else f"{geo_key}_{v}")
         if style == "solid":
             textures[f"shimmer_{v}"] = CT + f"shimmer_{v}"
@@ -63,7 +73,7 @@ def construct_client(name, geo_key, style, extras):
 
 def projectile_client(name, geo_key):
     textures = {}
-    for v in CORPS_VARIANTS:
+    for v in TEXTURED_CORPS:
         textures[v] = CT + (geo_key if v == "green" else f"{geo_key}_{v}")
         textures[f"shimmer_{v}"] = CT + f"shimmer_{v}"
     return {"format_version": "1.10.0", "minecraft:client_entity": {"description": {
@@ -81,8 +91,8 @@ def target_client():
     return {"format_version": "1.10.0", "minecraft:client_entity": {"description": {
         "identifier": "glc:training_target",
         "materials": {"core": "entity_emissive_alpha", "glow": "charged_creeper"},
-        "textures": {"green": CT + "training_target", "yellow": CT + "training_target",
-                     "shimmer_green": CT + "shimmer_green", "shimmer_yellow": CT + "shimmer_green"},
+        "textures": {k: v for c in TEXTURED_CORPS
+                     for k, v in ((c, CT + "training_target"), (f"shimmer_{c}", CT + "shimmer_green"))},
         "geometry": {"default": "geometry.glc.training_target", "glow": "geometry.glc.training_target_glow"},
         "animations": {"bob": "animation.glc.target.bob"},
         "scripts": {"animate": ["bob"]},
@@ -130,9 +140,9 @@ def lantern_client(char):
 
 
 def render_controllers(battery_groups):
-    arr_core = {"Array.core": [f"Texture.{v}" for v in CORPS_VARIANTS]}
-    arr_glow = {"Array.glow": [f"Texture.shimmer_{v}" for v in CORPS_VARIANTS]}
-    idx = f"math.clamp(q.property('glc:corps'), 0, {len(CORPS_VARIANTS) - 1})"
+    arr_core = {"Array.core": [f"Texture.{corps_variant(c)}" for c in CORPS_IDS]}
+    arr_glow = {"Array.glow": [f"Texture.shimmer_{corps_variant(c)}" for c in CORPS_IDS]}
+    idx = f"math.clamp(q.property('glc:corps'), 0, {len(CORPS_IDS) - 1})"
     rc = {
         "controller.render.glc.construct_core": {
             "arrays": {"textures": arr_core},

@@ -9,8 +9,8 @@
       },
       "textures": {
         "green": "textures/glc/entity/constructs/training_target",
-        "yellow": "textures/glc/entity/constructs/training_target",
         "shimmer_green": "textures/glc/entity/constructs/shimmer_green",
+        "yellow": "textures/glc/entity/constructs/training_target",
         "shimmer_yellow": "textures/glc/entity/constructs/shimmer_green"
       },
       "geometry": {

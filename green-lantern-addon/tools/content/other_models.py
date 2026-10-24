@@ -119,7 +119,8 @@ def humanoid(identifier, overlay=True, inflate=0.0, bounds_h=3):
     """
     g = Geometry(identifier, tex_w=64, tex_h=128, bounds_w=2.5, bounds_h=bounds_h,
                  bounds_offset=(0, 1.2, 0))
-    head_inf = inflate + (0.05 if inflate else 0.0)
+    # a worn suit's head must sit outside the skin's hat layer (inflated 0.5) or hair/hats poke through
+    head_inf = max(inflate + 0.05, 0.55) if inflate else 0.0
 
     def part(bone, origin, size, key, layer_key=None, inf=inflate):
         g.cube(bone, origin, size, inflate=inf, uv=list(SKIN_UV[key]))

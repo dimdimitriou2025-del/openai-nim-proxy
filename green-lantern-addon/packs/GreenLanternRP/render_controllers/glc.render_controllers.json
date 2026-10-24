@@ -6,7 +6,14 @@
         "textures": {
           "Array.core": [
             "Texture.green",
-            "Texture.yellow"
+            "Texture.yellow",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green"
           ]
         }
       },
@@ -17,7 +24,7 @@
         }
       ],
       "textures": [
-        "Array.core[math.clamp(q.property('glc:corps'), 0, 1)]"
+        "Array.core[math.clamp(q.property('glc:corps'), 0, 8)]"
       ],
       "ignore_lighting": true
     },
@@ -26,7 +33,14 @@
         "textures": {
           "Array.glow": [
             "Texture.shimmer_green",
-            "Texture.shimmer_yellow"
+            "Texture.shimmer_yellow",
+            "Texture.shimmer_green",
+            "Texture.shimmer_green",
+            "Texture.shimmer_green",
+            "Texture.shimmer_green",
+            "Texture.shimmer_green",
+            "Texture.shimmer_green",
+            "Texture.shimmer_green"
           ]
         }
       },
@@ -37,7 +51,7 @@
         }
       ],
       "textures": [
-        "Array.glow[math.clamp(q.property('glc:corps'), 0, 1)]"
+        "Array.glow[math.clamp(q.property('glc:corps'), 0, 8)]"
       ],
       "uv_anim": {
         "offset": [
@@ -56,7 +70,14 @@
         "textures": {
           "Array.core": [
             "Texture.green",
-            "Texture.yellow"
+            "Texture.yellow",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green",
+            "Texture.green"
           ]
         }
       },
@@ -67,7 +88,7 @@
         }
       ],
       "textures": [
-        "Array.core[math.clamp(q.property('glc:corps'), 0, 1)]"
+        "Array.core[math.clamp(q.property('glc:corps'), 0, 8)]"
       ],
       "ignore_lighting": true
     },

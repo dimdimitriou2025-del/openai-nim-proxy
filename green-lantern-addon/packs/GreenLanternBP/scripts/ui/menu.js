@@ -61,7 +61,7 @@ export async function openMainMenu(player) {
   actions.push(() => openGuide(player));
   f.button("§l§2Ring Settings§r\n§8Flight speed, HUD...", `${ICON}ui_settings`);
   actions.push(() => openSettings(player));
-  f.button(d.ringOn ? "§l§8Power Down Ring§r\n§8Stops HUD, flight & casting" : "§l§aPower Up Ring§r\n§8Reactivate your ring", `${ICON}ui_power`);
+  f.button(d.ringOn ? "§l§8Power Down Ring§r\n§8Stops flight, casting & regen" : "§l§aPower Up Ring§r\n§8Reactivate your ring", `${ICON}ui_power`);
   actions.push(() => setRingPower(player, !d.ringOn));
   const res = await showForm(player, f);
   if (!res || res.canceled || res.selection === undefined) return;

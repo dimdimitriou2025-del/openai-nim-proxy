@@ -347,6 +347,7 @@ for p in glob.glob(os.path.join(BP, "recipes", "**", "*.json"), recursive=True):
         err(f"recipe {rel(p)}: pattern letters without key {letters - set(r['key'])}")
 
 # ---------------------------------------------------------------- scripts
+entity_events = {ev for e in bp_entities.values() for ev in e.get("events", {})}
 script_files = glob.glob(os.path.join(BP, "scripts", "**", "*.js"), recursive=True)
 src = {p: open(p, encoding="utf-8").read() for p in script_files}
 main_src = src.get(os.path.join(BP, "scripts", "main.js"), "")
@@ -355,6 +356,8 @@ for cc in custom_components:
         err(f"custom component {cc} used in JSON but not registered in main.js")
 for p, s in src.items():
     for pid in set(re.findall(r'"(glc:[a-z_]+)"', s)):
+        if pid in entity_events:
+            continue  # triggerEvent target
         if pid in particles or pid in bp_entities or pid in known_items or pid.startswith("glc:life") or pid in custom_components:
             continue
         if pid in ("glc:owner", "glc:data", "glc:state", "glc:corps", "glc:size", "glc:pitch", "glc:casting",
