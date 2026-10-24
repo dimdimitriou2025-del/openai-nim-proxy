@@ -1,6 +1,7 @@
 // Targeting, damage and world-query helpers shared by constructs and systems.
 import { EntityDamageCause, world } from "@minecraft/server";
 import { add, dist, mul, norm, pointSegment, sub } from "./vec.js";
+import { rt } from "../core/state.js";
 
 export const isPlayer = (e) => !!e && e.typeId === "minecraft:player";
 export const valid = (e) => !!e && e.isValid;
@@ -133,8 +134,16 @@ export function groundBelow(dim, loc, maxDown = 24) {
   }
 }
 
+/** Sinestro and wearers of his uniform strike with fear. */
+function strikesWithFear(caster) {
+  if (!valid(caster)) return false;
+  if (caster.typeId === "glc:sinestro") return true;
+  return caster.typeId === "minecraft:player" && rt(caster.id).perk === "fear";
+}
+
 /**
  * Damage + optional knockback, attributed to the caster (so kills count as theirs).
+ * Fear (Sinestro's perk) also weakens and slows whoever survives the hit.
  * @param {import("@minecraft/server").Entity} caster
  * @param {import("@minecraft/server").Entity} target
  */
@@ -145,6 +154,14 @@ export function strike(caster, target, amount, knockDir = undefined, horizontal 
     ok = target.applyDamage(amount, { cause: EntityDamageCause.entityAttack, damagingEntity: valid(caster) ? caster : undefined });
   } catch {
     ok = false;
+  }
+  if (ok && valid(target) && strikesWithFear(caster)) {
+    try {
+      target.addEffect("weakness", 80, { amplifier: 0 });
+      target.addEffect("slowness", 60, { amplifier: 1 });
+    } catch {
+      // effect-immune entity
+    }
   }
   if (knockDir && (horizontal || vertical)) {
     try {

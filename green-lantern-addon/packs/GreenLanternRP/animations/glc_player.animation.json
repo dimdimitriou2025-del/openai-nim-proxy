@@ -1,0 +1,127 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.glc.player.cast_right": {
+      "animation_length": 0.65,
+      "bones": {
+        "rightArm": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.1": [
+              "(v.is_first_person || v.is_paperdoll) ? 0 : -90 + q.target_x_rotation - this",
+              "(v.is_first_person || v.is_paperdoll) ? 0 : -5 + q.target_y_rotation - this",
+              0
+            ],
+            "0.45": [
+              "(v.is_first_person || v.is_paperdoll) ? 0 : -90 + q.target_x_rotation - this",
+              "(v.is_first_person || v.is_paperdoll) ? 0 : -5 + q.target_y_rotation - this",
+              0
+            ],
+            "0.65": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.glc.player.cast_left": {
+      "animation_length": 0.65,
+      "bones": {
+        "leftArm": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.1": [
+              "(v.is_first_person || v.is_paperdoll) ? 0 : -90 + q.target_x_rotation - this",
+              "(v.is_first_person || v.is_paperdoll) ? 0 : 5 + q.target_y_rotation - this",
+              0
+            ],
+            "0.45": [
+              "(v.is_first_person || v.is_paperdoll) ? 0 : -90 + q.target_x_rotation - this",
+              "(v.is_first_person || v.is_paperdoll) ? 0 : 5 + q.target_y_rotation - this",
+              0
+            ],
+            "0.65": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.glc.player.flight": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "rotation": [
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * (90 + q.target_x_rotation - this)",
+            0,
+            0
+          ],
+          "position": [
+            0,
+            "(v.is_first_person || v.is_paperdoll) ? 0 : (math.sin(q.target_x_rotation) * 17 + 5) * math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)",
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.cos(q.target_x_rotation) * 17 * math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)"
+          ]
+        },
+        "head": {
+          "rotation": [
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * (-55 - this)",
+            0,
+            0
+          ]
+        },
+        "rightArm": {
+          "rotation": [
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * (-172 - this)",
+            0,
+            "(v.is_first_person || v.is_paperdoll) ? 0 : (1 - math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)) * 12"
+          ]
+        },
+        "leftArm": {
+          "rotation": [
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * (-10 - this)",
+            0,
+            "(v.is_first_person || v.is_paperdoll) ? 0 : -(1 - math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)) * 12 - math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * 6"
+          ]
+        },
+        "rightLeg": {
+          "rotation": [
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * (4 - this) + (1 - math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)) * math.sin(q.life_time * 90) * 4",
+            0,
+            0
+          ]
+        },
+        "leftLeg": {
+          "rotation": [
+            "(v.is_first_person || v.is_paperdoll) ? 0 : math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1) * (-6 - this) - (1 - math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)) * math.sin(q.life_time * 90) * 4",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.glc.player.reset": {
+      "animation_length": 0.05,
+      "bones": {
+        "root": {
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  }
+}

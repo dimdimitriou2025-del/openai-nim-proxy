@@ -6,6 +6,7 @@ metal parts, Lantern emblems and recolouring for other Corps.
 import colorsys
 import math
 import random
+import zlib
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
@@ -288,7 +289,7 @@ def paint_geometry(geo, img, corps="green", default=None):
             fs = dict(spec)
             fs.update((spec.get("faces") or {}).get(fname, {}))
             style = fs.get("style", "energy")
-            seed = idx * 7 + hash(fname) % 97
+            seed = idx * 7 + zlib.crc32(fname.encode()) % 97  # stable across runs (str hash is salted)
             if style == "energy":
                 energy_face(img, rect, corps=fs.get("corps", corps), seed=seed,
                             pattern=fs.get("pattern", "scan"), rim=fs.get("rim", 1),

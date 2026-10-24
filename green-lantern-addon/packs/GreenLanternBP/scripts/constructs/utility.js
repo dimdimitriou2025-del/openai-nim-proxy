@@ -198,6 +198,19 @@ class DrillTask extends Task {
     return add(center(add(this.origin, mul(this.axis, Math.max(0, this.layer - 1)))), mul(this.axis, -0.6));
   }
 
+  /** Pull the blocks dropped by the last layer to the caster. */
+  collect(at) {
+    const c = this.ctx.caster;
+    if (!valid(c) || c.dimension.id !== this.ctx.dim.id) return;
+    try {
+      for (const item of this.ctx.dim.getEntities({ type: "minecraft:item", location: at, maxDistance: 2.5 })) {
+        item.teleport(c.location);
+      }
+    } catch {
+      // unloaded
+    }
+  }
+
   step(t) {
     const { dim, corps } = this.ctx;
     moveConstruct(this.e, this.headPos(), this.yaw, this.pitch);
@@ -205,6 +218,7 @@ class DrillTask extends Task {
       if (t % 2 === 0) particle(dim, "glc:spark", add(this.headPos(), mul(this.axis, 1)), corps);
       return true;
     }
+    if (this.layer > 0) this.collect(center(add(this.origin, mul(this.axis, this.layer - 1))));
     if (this.layer >= this.depth) return t < this.depth * 4 + 6;
     const base = add(this.origin, mul(this.axis, this.layer));
     for (let a = -1; a <= 1; a++) {

@@ -359,6 +359,44 @@ def lantern_animations():
     }}
 
 
+
+# Player poses, played from scripts with Entity.playAnimation on their own runtime
+# controllers (glc:cast, glc:flight).  Third person only: every channel is zero in
+# first person and in the inventory paper doll.
+_TP = "(v.is_first_person || v.is_paperdoll) ? 0 : "
+_FLY = "math.clamp((q.ground_speed + math.abs(q.vertical_speed)) / 8, 0, 1)"
+
+
+def _cast_arm(yaw):
+    aim = [_TP + "-90 + q.target_x_rotation - this", _TP + f"{yaw} + q.target_y_rotation - this", 0]
+    return {"rotation": {"0.0": [0, 0, 0], "0.1": aim, "0.45": aim, "0.65": [0, 0, 0]}}
+
+
+def player_animations():
+    a = _FLY
+    return {"format_version": "1.8.0", "animations": {
+        "animation.glc.player.cast_right": {"animation_length": 0.65, "bones": {"rightArm": _cast_arm(-5)}},
+        "animation.glc.player.cast_left": {"animation_length": 0.65, "bones": {"leftArm": _cast_arm(5)}},
+        # superhero pose: upright while hovering, leaning into the flight direction with speed
+        "animation.glc.player.flight": {
+            "loop": True,
+            "bones": {
+                "root": {
+                    "rotation": [_TP + f"{a} * (90 + q.target_x_rotation - this)", 0, 0],
+                    "position": [0, _TP + f"(math.sin(q.target_x_rotation) * 17 + 5) * {a}",
+                                 _TP + f"math.cos(q.target_x_rotation) * 17 * {a}"],
+                },
+                "head": {"rotation": [_TP + f"{a} * (-55 - this)", 0, 0]},
+                "rightArm": {"rotation": [_TP + f"{a} * (-172 - this)", 0, _TP + f"(1 - {a}) * 12"]},
+                "leftArm": {"rotation": [_TP + f"{a} * (-10 - this)", 0, _TP + f"-(1 - {a}) * 12 - {a} * 6"]},
+                "rightLeg": {"rotation": [_TP + f"{a} * (4 - this) + (1 - {a}) * math.sin(q.life_time * 90) * 4", 0, 0]},
+                "leftLeg": {"rotation": [_TP + f"{a} * (-6 - this) - (1 - {a}) * math.sin(q.life_time * 90) * 4", 0, 0]},
+            },
+        },
+        # played on the flight controller to end the pose
+        "animation.glc.player.reset": {"animation_length": 0.05, "bones": {"root": {"rotation": [0, 0, 0]}}},
+    }}
+
 def ring_attachable():
     return {"format_version": "1.10.0", "minecraft:attachable": {"description": {
         "identifier": "glc:power_ring",

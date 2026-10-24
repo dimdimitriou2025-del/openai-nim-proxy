@@ -2,7 +2,7 @@
 // for running the real scripts in Node.  Not a game simulation - just enough
 // world/entity/block behaviour to exercise every code path and catch runtime errors.
 
-export const log = { particles: [], sounds: [], commands: [], messages: [], actionbars: [], titles: [], warnings: [] };
+export const log = { particles: [], sounds: [], commands: [], messages: [], actionbars: [], titles: [], warnings: [], animations: [] };
 
 // ------------------------------------------------------------------ enums
 export const EntityDamageCause = Object.fromEntries(["anvil", "blockExplosion", "campfire", "charging", "contact",
@@ -136,7 +136,11 @@ class Dimension {
   runCommand(cmd) {
     log.commands.push(cmd);
     const m = cmd.match(/^setblock (-?\d+) (-?\d+) (-?\d+) air destroy$/);
-    if (m) this.getBlock({ x: +m[1], y: +m[2], z: +m[3] }).setType("minecraft:air");
+    if (m) {
+      const b = this.getBlock({ x: +m[1], y: +m[2], z: +m[3] });
+      if (!b.isAir) this.spawnEntity("minecraft:item", { x: +m[1] + 0.5, y: +m[2] + 0.25, z: +m[3] + 0.5 });
+      b.setType("minecraft:air");
+    }
     return { successCount: 1 };
   }
 }
@@ -248,6 +252,19 @@ export class Entity {
   remove() { this._check(); this.valid = false; }
   kill() { this.health = 0; this._die(undefined); return true; }
   getHeadLocation() { return { x: this.location.x, y: this.location.y + 1.62, z: this.location.z }; }
+  getEntitiesFromViewDirection(opts = {}) {
+    const eye = this.getHeadLocation(), dir = this.getViewDirection(), max = opts.maxDistance ?? 64;
+    const hits = [];
+    for (const e of entities.values()) {
+      if (e === this || !e.isValid || e.dimension !== this.dimension) continue;
+      const c = { x: e.location.x - eye.x, y: e.location.y + 0.9 - eye.y, z: e.location.z - eye.z };
+      const t = c.x * dir.x + c.y * dir.y + c.z * dir.z;
+      if (t < 0 || t > max) continue;
+      const off = Math.hypot(c.x - dir.x * t, c.y - dir.y * t, c.z - dir.z * t);
+      if (off <= 0.9) hits.push({ entity: e, distance: t });
+    }
+    return hits.sort((a, b) => a.distance - b.distance);
+  }
   getViewDirection() { const r = (this.rotation.y * Math.PI) / 180, p = (this.rotation.x * Math.PI) / 180; return { x: -Math.sin(r) * Math.cos(p), y: -Math.sin(p), z: Math.cos(r) * Math.cos(p) }; }
   getRotation() { return { ...this.rotation }; }
   getVelocity() { return { ...this.velocity }; }
@@ -275,6 +292,7 @@ export class Entity {
   }
   addEffect(id, dur, opts) { this.effects[id] = { dur, ...opts }; return {}; }
   removeEffect(id) { delete this.effects[id]; return true; }
+  playAnimation(name, opts = {}) { this._check(); log.animations.push({ entity: this.id, name, ...opts }); }
   triggerEvent(ev) { if (ev === "glc:despawn") this.valid = false; }
   setDynamicProperty(k, v) { if (typeof v === "string" && v.length > 32767) throw new Error("dynamic property too long"); this.dyn[k] = v; }
   getDynamicProperty(k) { return this.dyn[k]; }

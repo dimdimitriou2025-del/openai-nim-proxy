@@ -1,6 +1,6 @@
 // The Power Ring item: use handling, equip detection and passive glow.
 import { EquipmentSlot, system, world } from "@minecraft/server";
-import { BOOK_ID, RING_ID } from "../config.js";
+import { BATTERY_BLOCK_ID, BOOK_ID, CENTRAL_BATTERY_ID, RING_ID } from "../config.js";
 import { data, rt } from "./state.js";
 import { corpsOf, ringSay, toast } from "./lantern.js";
 import { oathIntro } from "./oath.js";
@@ -11,8 +11,8 @@ import { particle, playerSound } from "../lib/fx.js";
 import { add, v3 } from "../lib/vec.js";
 
 /**
- * Both the item custom component and the world itemUse event route here; a use
- * is handled once even if both fire for the same tap.
+ * The item custom component (use in the air or on a block) and the world itemUse
+ * event all route here; a use is handled once even if several fire for one tap.
  */
 function handleUse(player, itemId) {
   const r = rt(player.id);
@@ -30,6 +30,14 @@ export const ringComponent = {
     if (!player || player.typeId !== "minecraft:player") return;
     handleUse(player, RING_ID);
   },
+  /** Aiming at a block (hammer, bridge, grapple...) must cast too. */
+  /** @param {import("@minecraft/server").ItemComponentUseOnEvent} ev */
+  onUseOn(ev) {
+    const player = ev.source;
+    if (!player || player.typeId !== "minecraft:player") return;
+    if (ev.block?.typeId === BATTERY_BLOCK_ID) return; // the battery opens its own menu
+    handleUse(player, RING_ID);
+  },
 };
 
 /** Item custom component: glc:book_of_oa */
@@ -38,7 +46,21 @@ export const bookComponent = {
   onUse(ev) {
     if (ev.source) handleUse(ev.source, BOOK_ID);
   },
+  /** @param {import("@minecraft/server").ItemComponentUseOnEvent} ev */
+  onUseOn(ev) {
+    if (ev.source && ev.block?.typeId !== BATTERY_BLOCK_ID) handleUse(ev.source, BOOK_ID);
+  },
 };
+
+/** Tapping the Central Power Battery or a Lantern opens their menu; don't also cast at them. */
+function aimingAtInteractable(player) {
+  try {
+    const hit = player.getEntitiesFromViewDirection({ maxDistance: 5 })[0]?.entity;
+    return !!hit && (hit.typeId === CENTRAL_BATTERY_ID || hit.matches({ families: ["glc_lantern"] }));
+  } catch {
+    return false;
+  }
+}
 
 world.afterEvents.itemUse.subscribe((ev) => {
   const id = ev.itemStack?.typeId;
@@ -65,6 +87,7 @@ export function useRing(player) {
     toast(player, "§7Ring powered down. §fSneak + use§7 to open the menu and power it up.");
     return;
   }
+  if (aimingAtInteractable(player)) return;
   tryCast(player, d.selected);
 }
 

@@ -9,6 +9,7 @@ import {
   FLIGHT_MOVE_DRAIN, FLIGHT_SPRINT_BOOST, FLIGHT_STRAFE_SIGN, FLIGHT_VERTICAL, SAFE_FALL_TICKS,
 } from "../config.js";
 import { particle, playerSound, sound } from "../lib/fx.js";
+import { flightPose } from "../lib/poses.js";
 import { add, clamp, len, mul, rightFromYaw, v3 } from "../lib/vec.js";
 
 /** Highest speed level the player's rank allows (1-3). */
@@ -44,6 +45,7 @@ export function startFlight(player, quiet = false) {
     // ignore
   }
   sound(player.dimension, "glc.flight_start", player.location, 0.9);
+  flightPose(player, true);
   particle(player.dimension, "glc:ring_burst", add(player.location, v3(0, 0.2, 0)), corpsOf(player));
   if (!quiet) toast(player, "§aFlight ON §7- joystick to fly where you look, jump to climb, double-jump to land", 60);
   return true;
@@ -56,6 +58,7 @@ export function stopFlight(player, reason = "") {
   r.flying = false;
   r.safeFallUntil = system.currentTick + SAFE_FALL_TICKS;
   sound(player.dimension, "glc.flight_stop", player.location, 0.8);
+  flightPose(player, false);
   if (reason) toast(player, reason, 50);
 }
 

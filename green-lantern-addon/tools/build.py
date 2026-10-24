@@ -123,6 +123,7 @@ def build_rp_defs(models):
     io.write_json(io.rp("render_controllers", "glc.render_controllers.json"), rp_defs.render_controllers(cb_geo.groups))
     io.write_json(io.rp("animations", "glc_constructs.animation.json"), rp_defs.construct_animations())
     io.write_json(io.rp("animations", "glc_lanterns.animation.json"), rp_defs.lantern_animations())
+    io.write_json(io.rp("animations", "glc_player.animation.json"), rp_defs.player_animations())
     io.write_json(io.rp("animation_controllers", "glc.animation_controllers.json"), rp_defs.construct_controllers())
     io.write_json(io.rp("attachables", "glc", "power_ring.json"), rp_defs.ring_attachable())
     for s in gd.SUITS:

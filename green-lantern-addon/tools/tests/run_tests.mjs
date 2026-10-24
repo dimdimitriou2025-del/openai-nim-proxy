@@ -206,10 +206,14 @@ await test("cooldowns block immediate recast", async () => {
   await tick(2);
   D().selected = "fist";
   state.rt(p.id).cooldowns.fist = 0;
+  log.animations.length = 0;
   await useRing(3);
   await useRing(1);
   assert.equal(dim.getEntities({ type: "glc:fist" }).length, 1, "only one fist despite two uses");
   assert.ok(log.actionbars.at(-1).includes("recharging"), "cooldown feedback shown");
+  const casts = log.animations.filter((a) => a.entity === p.id && a.name === "animation.glc.player.cast_right");
+  assert.equal(casts.length, 1, "one cast gesture for the one successful cast");
+  assert.equal(casts[0].controller, "glc:cast");
   await tick(40);
 });
 
@@ -229,6 +233,39 @@ await test("ring use is handled once when both the component and world itemUse f
   await tick(2);
   assert.equal(dim.getEntities({ type: "glc:fist" }).length, 1);
   await tick(40);
+});
+
+await test("using the ring on a block casts; on a Power Battery block it does not", async () => {
+  reg.commands["glc:recharge"].cb({ sourceEntity: p });
+  await tick(30);
+  D().selected = "fist";
+  state.rt(p.id).cooldowns.fist = 0;
+  const useOn = (typeId) => reg.items["glc:power_ring"].onUseOn({ source: p, itemStack: p.inventory.getItem(0), block: { typeId } });
+  useOn("glc:power_battery");
+  await tick(3);
+  assert.equal(dim.getEntities({ type: "glc:fist" }).length, 0, "battery tap does not cast");
+  useOn("minecraft:stone");
+  await tick(3);
+  assert.equal(dim.getEntities({ type: "glc:fist" }).length, 1, "tap on a block casts");
+  await tick(40);
+});
+
+await test("the ring does not fire at the Central Power Battery or a Lantern being talked to", async () => {
+  reg.commands["glc:recharge"].cb({ sourceEntity: p });
+  await tick(30);
+  p.location = { x: 0.5, y: 64, z: 0.5 };
+  p.rotation = { x: 0, y: 0 };
+  D().selected = "beam";
+  state.rt(p.id).cooldowns.beam = 0;
+  const ally = dim.spawnEntity("glc:hal_jordan", { x: 0.5, y: 64, z: 3.5 });
+  const e0 = D().energy + D().over;
+  await useRing(3);
+  assert.equal(ally.damageTaken ?? 0, 0, "ally not hit");
+  assert.ok(D().energy + D().over >= e0 - 0.01, "no energy spent");
+  ally.remove();
+  await useRing(3);
+  assert.ok(D().energy + D().over < e0, "casts normally once nothing interactable is in the way");
+  await tick(20);
 });
 
 await test("not enough energy refuses casting", async () => {
@@ -280,6 +317,11 @@ await test("drill breaks blocks but is refused in adventure mode", async () => {
   state.rt(p.id).cooldowns.drill = 0;
   await useRing(30);
   assert.ok(log.commands.slice(before).filter((c) => c.startsWith("setblock")).length >= 9);
+  const drops = dim.getEntities({ type: "minecraft:item" });
+  assert.ok(drops.length >= 9, `blocks dropped (${drops.length})`);
+  const far = drops.filter((i) => Math.hypot(i.location.x - p.location.x, i.location.y - p.location.y, i.location.z - p.location.z) > 0.01);
+  assert.equal(far.length, 0, "every dropped block was collected to the player");
+  for (const i of drops) i.remove();
   p.rotation = { x: 0, y: 0 };
 });
 
@@ -320,6 +362,9 @@ await test("flight: double-tap jump toggles, joystick flies, energy drains, land
   press();
   await tick(1);
   assert.equal(state.rt(p.id).flying, true, "flying after double tap");
+  const pose = log.animations.filter((a) => a.entity === p.id && a.controller === "glc:flight");
+  assert.equal(pose.at(-1)?.name, "animation.glc.player.flight", "flight pose started");
+  assert.ok(pose.at(-1).stopExpression.includes("q.is_on_ground"), "pose ends by itself on landing");
   p.location = { x: 0.5, y: 70, z: 0.5 };
   p.move = { x: 0, y: 1 };
   p.knockbacks.length = 0;
@@ -335,6 +380,8 @@ await test("flight: double-tap jump toggles, joystick flies, energy drains, land
   press();
   await tick(1);
   assert.equal(state.rt(p.id).flying, false, "landed");
+  const end = log.animations.filter((a) => a.entity === p.id && a.controller === "glc:flight").at(-1);
+  assert.equal(end?.name, "animation.glc.player.reset", "flight pose ended");
 });
 
 await test("creative mode double-tap does not toggle ring flight", async () => {
@@ -458,6 +505,31 @@ await test("central battery: uniform locker and ally call (rank 3)", async () =>
   assert.equal(hal.isValid, false, "previous ally dismissed");
   assert.ok(dim.getEntities({ type: "glc:john_stewart" })[0]);
   z.remove();
+});
+
+await test("Sinestro's uniform turns constructs yellow and strikes inflict fear", async () => {
+  clearHardlight();
+  for (const e of dim.getEntities({ families: ["glc_lantern"] })) e.remove();
+  p.equipment.Chest = new MC.ItemStack("glc:suit_sinestro");
+  await tick(25);
+  assert.equal(state.rt(p.id).perk, "fear", "fear perk detected");
+  reg.commands["glc:recharge"].cb({ sourceEntity: p });
+  p.rotation = { x: 5, y: 0 };
+  p.location = { x: 0.5, y: 64, z: 0.5 };
+  const [z] = spawnZombieRing(1, 5);
+  z.health = 200;
+  D().selected = "beam";
+  state.rt(p.id).cooldowns.beam = 0;
+  log.particles.length = 0;
+  await useRing(3);
+  assert.ok(z.damageTaken > 0, "beam hit");
+  assert.ok(z.effects.weakness && z.effects.slowness, "fear: weakness and slowness applied");
+  const yellow = log.particles.filter((x) => x.vars && x.vars["variable.color.r"] > 0.9 && x.vars["variable.color.b"] < 0.3);
+  assert.ok(yellow.length > 0, "yellow construct energy");
+  z.remove();
+  delete p.equipment.Chest;
+  await tick(25);
+  assert.notEqual(state.rt(p.id).perk, "fear", "perk removed with the uniform");
 });
 
 await test("talking to an unbound Lantern can recruit them", async () => {

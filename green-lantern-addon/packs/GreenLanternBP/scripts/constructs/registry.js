@@ -8,6 +8,7 @@ import {
 } from "../core/lantern.js";
 import { MAX_ACTIVE_CONSTRUCTS_PER_PLAYER, MAX_ACTIVE_CONSTRUCTS_TOTAL } from "../config.js";
 import { dissipateFx, formFx, playerSound, sound } from "../lib/fx.js";
+import { castPose } from "../lib/poses.js";
 import { add, mul, rightFromYaw, v3, yawPitchFromDir } from "../lib/vec.js";
 import { centerOf, directionTo, valid } from "../lib/util.js";
 
@@ -138,6 +139,7 @@ export function tryCast(caster, id, target = undefined) {
     d.recent = [id, ...d.recent.filter((x) => x !== id)].slice(0, 3);
     save(player);
     if (def.xp) addXp(player, def.xp);
+    castPose(player, r.offhand && !r.inHand);
   }
   return true;
 }

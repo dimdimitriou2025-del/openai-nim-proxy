@@ -359,9 +359,13 @@ for p, s in src.items():
             continue
         if pid in ("glc:owner", "glc:data", "glc:state", "glc:corps", "glc:size", "glc:pitch", "glc:casting",
                    "glc:despawn", "glc:ring", "glc:oath", "glc:guide", "glc:fly", "glc:rank", "glc:recharge",
-                   "glc:kit", "glc:reset", "glc:power_ring", "glc:book_of_oa"):
+                   "glc:kit", "glc:reset", "glc:power_ring", "glc:book_of_oa",
+                   "glc:cast", "glc:flight"):  # last two: runtime animation controllers
             continue
         err(f"{rel(p)}: unknown id {pid}")
+    for an in set(re.findall(r'"(animation\.glc\.[a-z_.]+)"', s)):
+        if an not in animations:
+            err(f"{rel(p)}: animation {an} not defined")
     for sid in set(re.findall(r'"(glc\.[a-z_]+)"', s)):
         if sid not in sound_defs:
             err(f"{rel(p)}: sound {sid} not defined")
