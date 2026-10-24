@@ -1,0 +1,69 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.glc.construct.state": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "grow"
+          ],
+          "transitions": [
+            {
+              "dissolving": "q.property('glc:state') == 2"
+            }
+          ]
+        },
+        "dissolving": {
+          "animations": [
+            "dissolve"
+          ],
+          "transitions": [
+            {
+              "active": "q.property('glc:state') != 2"
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.glc.lantern.pose": {
+      "initial_state": "ground",
+      "states": {
+        "ground": {
+          "animations": [
+            {
+              "walk": "q.modified_move_speed"
+            },
+            "idle",
+            {
+              "cast": "v.casting"
+            }
+          ],
+          "transitions": [
+            {
+              "air": "!q.is_on_ground && !q.is_in_water"
+            }
+          ]
+        },
+        "air": {
+          "animations": [
+            {
+              "fly": "q.modified_move_speed > 0.15"
+            },
+            {
+              "hover": "q.modified_move_speed <= 0.15"
+            },
+            {
+              "cast": "v.casting"
+            }
+          ],
+          "transitions": [
+            {
+              "ground": "q.is_on_ground || q.is_in_water"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

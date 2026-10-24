@@ -1,0 +1,175 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.glc.shield",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 4,
+        "visible_bounds_offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -9,
+                -14,
+                -1
+              ],
+              "size": [
+                18,
+                28,
+                1
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -9,
+                13,
+                -1.5
+              ],
+              "size": [
+                18,
+                1,
+                2
+              ],
+              "uv": [
+                0,
+                30
+              ]
+            },
+            {
+              "origin": [
+                -9,
+                -14,
+                -1.5
+              ],
+              "size": [
+                18,
+                1,
+                2
+              ],
+              "uv": [
+                41,
+                30
+              ]
+            }
+          ]
+        },
+        {
+          "name": "wing_l",
+          "parent": "root",
+          "pivot": [
+            9,
+            0,
+            -1
+          ],
+          "rotation": [
+            0,
+            -28,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                9,
+                -12,
+                -1
+              ],
+              "size": [
+                12,
+                24,
+                1
+              ],
+              "uv": [
+                53,
+                0
+              ]
+            },
+            {
+              "origin": [
+                20,
+                -12,
+                -1.5
+              ],
+              "size": [
+                1,
+                24,
+                2
+              ],
+              "uv": [
+                39,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "wing_r",
+          "parent": "root",
+          "pivot": [
+            -9,
+            0,
+            -1
+          ],
+          "rotation": [
+            0,
+            28,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -21,
+                -12,
+                -1
+              ],
+              "size": [
+                12,
+                24,
+                1
+              ],
+              "uv": [
+                80,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -21,
+                -12,
+                -1.5
+              ],
+              "size": [
+                1,
+                24,
+                2
+              ],
+              "uv": [
+                46,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

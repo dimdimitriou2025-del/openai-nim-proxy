@@ -1,0 +1,39 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "glc:bubble",
+      "materials": {
+        "core": "entity_beam_additive"
+      },
+      "textures": {
+        "green": "textures/glc/entity/constructs/bubble",
+        "yellow": "textures/glc/entity/constructs/bubble_yellow"
+      },
+      "geometry": {
+        "default": "geometry.glc.bubble"
+      },
+      "animations": {
+        "grow": "animation.glc.construct.grow",
+        "dissolve": "animation.glc.construct.dissolve",
+        "state": "controller.animation.glc.construct.state",
+        "glass_pulse": "animation.glc.glass.pulse"
+      },
+      "scripts": {
+        "pre_animation": [
+          "v.size = q.property('glc:size');",
+          "v.grow = math.min(q.life_time / 0.22, 1.0);",
+          "v.grow = v.grow < 1.0 ? v.grow * (1.25 - 0.25 * v.grow) : 1.0;"
+        ],
+        "animate": [
+          "state",
+          "glass_pulse"
+        ],
+        "should_update_bones_and_effects_offscreen": "1.0"
+      },
+      "render_controllers": [
+        "controller.render.glc.construct_glass"
+      ]
+    }
+  }
+}

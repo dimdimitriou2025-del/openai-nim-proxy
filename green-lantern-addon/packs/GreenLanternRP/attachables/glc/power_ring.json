@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "glc:power_ring",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/glc/attachables/power_ring"
+      },
+      "geometry": {
+        "default": "geometry.glc.ring_held"
+      },
+      "animations": {
+        "float": "animation.glc.ring_held.float"
+      },
+      "scripts": {
+        "animate": [
+          "float"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.glc.ring_held"
+      ]
+    }
+  }
+}

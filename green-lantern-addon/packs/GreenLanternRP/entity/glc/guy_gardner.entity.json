@@ -1,0 +1,43 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "glc:guy_gardner",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/glc/entity/lanterns/guy_gardner"
+      },
+      "geometry": {
+        "default": "geometry.glc.lantern"
+      },
+      "spawn_egg": {
+        "texture": "glc_egg_guy_gardner",
+        "texture_index": 0
+      },
+      "animations": {
+        "look": "animation.glc.lantern.look",
+        "idle": "animation.glc.lantern.idle",
+        "walk": "animation.glc.lantern.walk",
+        "fly": "animation.glc.lantern.fly",
+        "hover": "animation.glc.lantern.hover",
+        "cast": "animation.glc.lantern.cast",
+        "pose": "controller.animation.glc.lantern.pose"
+      },
+      "scripts": {
+        "pre_animation": [
+          "v.casting = q.property('glc:casting');"
+        ],
+        "animate": [
+          "look",
+          "pose"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.glc.lantern"
+      ],
+      "enable_attachables": false
+    }
+  }
+}

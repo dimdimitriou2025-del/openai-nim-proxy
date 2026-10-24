@@ -1,0 +1,447 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "glc.ring_activate": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/ring_activate",
+          "volume": 0.9,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.ring_equip": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/ring_equip",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.ring_low": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/ring_low",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.ring_empty": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/ring_empty",
+          "volume": 0.9,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.oath_success": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/oath_success",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.oath_fail": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/oath_fail",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.menu_open": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/menu_open",
+          "volume": 0.6,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.menu_select": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/menu_select",
+          "volume": 0.6,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.construct_form": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/construct_form",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.construct_dissipate": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/construct_dissipate",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.beam_fire": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/beam_fire",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.impact": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/impact",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.hammer_slam": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/hammer_slam",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.blade_swing": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/blade_swing",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.cannon_fire": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/cannon_fire",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.missile_launch": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/missile_launch",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.explosion": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 56.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/explosion",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.shield_up": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/shield_up",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.shield_hit": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/shield_hit",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.charge": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/charge",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.lance_fire": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 56.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/lance_fire",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.flight_start": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/flight_start",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.flight_stop": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/flight_stop",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.battery_charge": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 40.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/battery_charge",
+          "volume": 0.9,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.drone_fire": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/drone_fire",
+          "volume": 0.55,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.colossus_rise": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/colossus_rise",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.colossus_slam": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 72.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/colossus_slam",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.rank_up": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 40.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/rank_up",
+          "volume": 0.95,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.grapple_fire": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/grapple_fire",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.cage_lock": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/cage_lock",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.drill": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/drill",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.bubble_pop": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/bubble_pop",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.training_start": {
+      "category": "ui",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/training_start",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "glc.target_hit": {
+      "category": "player",
+      "min_distance": 1.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/glc/target_hit",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true
+        }
+      ]
+    }
+  }
+}

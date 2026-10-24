@@ -1,0 +1,364 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.glc.construct.grow": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "scale": "v.size * v.grow"
+        }
+      }
+    },
+    "animation.glc.construct.dissolve": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.4,
+      "bones": {
+        "root": {
+          "scale": "v.size * math.max(0.0, 1.0 - q.anim_time * 2.8) * (1.0 + math.sin(q.anim_time * 2600.0) * 0.12)"
+        }
+      }
+    },
+    "animation.glc.construct.pitch": {
+      "loop": true,
+      "bones": {
+        "pitch": {
+          "rotation": [
+            "q.property('glc:pitch')",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.glc.hammer.slam": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.6,
+      "bones": {
+        "swing": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.25": [
+              -38,
+              0,
+              0
+            ],
+            "0.4": [
+              92,
+              0,
+              0
+            ],
+            "0.46": [
+              86,
+              0,
+              0
+            ],
+            "0.55": [
+              90,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.glc.blade.swing": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 0.35,
+      "bones": {
+        "swing": {
+          "rotation": {
+            "0.0": [
+              0,
+              85,
+              10
+            ],
+            "0.22": [
+              0,
+              -85,
+              -10
+            ],
+            "0.35": [
+              0,
+              -95,
+              -12
+            ]
+          }
+        }
+      }
+    },
+    "animation.glc.cannon.recoil": {
+      "loop": true,
+      "animation_length": 0.25,
+      "bones": {
+        "barrel": {
+          "position": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.04": [
+              0,
+              0,
+              2.5
+            ],
+            "0.25": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.glc.drone.spin": {
+      "loop": true,
+      "bones": {
+        "ring": {
+          "rotation": [
+            0,
+            "q.life_time * 540",
+            0
+          ]
+        },
+        "root": {
+          "position": [
+            0,
+            "math.sin(q.life_time * 240) * 1.2",
+            0
+          ]
+        }
+      }
+    },
+    "animation.glc.drill.spin": {
+      "loop": true,
+      "bones": {
+        "spin": {
+          "rotation": [
+            0,
+            0,
+            "q.life_time * 1800"
+          ]
+        }
+      }
+    },
+    "animation.glc.glass.pulse": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "scale": "v.size * v.grow * (1.0 + math.sin(q.life_time * 220) * 0.015)"
+        }
+      }
+    },
+    "animation.glc.colossus.attack": {
+      "loop": "hold_on_last_frame",
+      "animation_length": 2.6,
+      "bones": {
+        "root": {
+          "position": {
+            "0.0": [
+              0,
+              -48,
+              0
+            ],
+            "0.8": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.8": [
+              0,
+              0,
+              0
+            ],
+            "1.5": [
+              -170,
+              0,
+              -10
+            ],
+            "1.75": [
+              -175,
+              0,
+              -10
+            ],
+            "1.95": [
+              -40,
+              0,
+              0
+            ],
+            "2.6": [
+              -45,
+              0,
+              0
+            ]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.8": [
+              0,
+              0,
+              0
+            ],
+            "1.5": [
+              -170,
+              0,
+              10
+            ],
+            "1.75": [
+              -175,
+              0,
+              10
+            ],
+            "1.95": [
+              -40,
+              0,
+              0
+            ],
+            "2.6": [
+              -45,
+              0,
+              0
+            ]
+          }
+        },
+        "body": {
+          "rotation": {
+            "0.8": [
+              0,
+              0,
+              0
+            ],
+            "1.6": [
+              -8,
+              0,
+              0
+            ],
+            "1.95": [
+              24,
+              0,
+              0
+            ],
+            "2.6": [
+              20,
+              0,
+              0
+            ]
+          }
+        },
+        "head": {
+          "rotation": {
+            "1.6": [
+              -15,
+              0,
+              0
+            ],
+            "1.95": [
+              -10,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.glc.projectile.face": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [
+            "-q.target_x_rotation",
+            "-q.target_y_rotation",
+            0
+          ]
+        }
+      }
+    },
+    "animation.glc.target.bob": {
+      "loop": true,
+      "bones": {
+        "disc": {
+          "rotation": [
+            0,
+            "math.sin(q.life_time * 90) * 25",
+            0
+          ]
+        },
+        "root": {
+          "position": [
+            0,
+            "math.sin(q.life_time * 140) * 1.5",
+            0
+          ]
+        }
+      }
+    },
+    "animation.glc.central_battery.idle": {
+      "loop": true,
+      "bones": {
+        "ring_a": {
+          "rotation": [
+            0,
+            "q.life_time * 40",
+            0
+          ]
+        },
+        "ring_b": {
+          "rotation": [
+            0,
+            "-q.life_time * 55",
+            0
+          ],
+          "position": [
+            0,
+            "math.sin(q.life_time * 60) * 1.5",
+            0
+          ]
+        },
+        "core_inner": {
+          "scale": "1.0 + math.sin(q.life_time * 180) * 0.04"
+        },
+        "core_outer": {
+          "scale": "1.0 + math.sin(q.life_time * 120 + 60) * 0.05"
+        }
+      }
+    },
+    "animation.glc.ring_held.float": {
+      "loop": true,
+      "bones": {
+        "ring": {
+          "position": [
+            "c.is_first_person ? -2.0 : 0.0",
+            "c.is_first_person ? 1.0 : -1.0",
+            "c.is_first_person ? -3.0 : -1.5"
+          ],
+          "rotation": [
+            "c.is_first_person ? 10.0 : 0.0",
+            "c.is_first_person ? -30.0 : 0.0",
+            0.0
+          ]
+        },
+        "ring_float": {
+          "rotation": [
+            0,
+            "q.life_time * 90",
+            0
+          ],
+          "position": [
+            0,
+            "math.sin(q.life_time * 160) * 0.4",
+            0
+          ]
+        }
+      }
+    }
+  }
+}

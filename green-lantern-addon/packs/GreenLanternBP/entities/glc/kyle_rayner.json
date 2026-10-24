@@ -1,0 +1,264 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "glc:kyle_rayner",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "properties": {
+        "glc:casting": {
+          "type": "bool",
+          "default": false,
+          "client_sync": true
+        }
+      }
+    },
+    "component_groups": {
+      "glc:despawn": {
+        "minecraft:instant_despawn": {}
+      },
+      "glc:wild": {
+        "minecraft:tameable": {
+          "probability": 1.0,
+          "tame_items": "minecraft:structure_void",
+          "tame_event": {
+            "event": "glc:on_tame",
+            "target": "self"
+          }
+        }
+      },
+      "glc:tamed": {
+        "minecraft:is_tamed": {},
+        "minecraft:behavior.follow_owner": {
+          "priority": 6,
+          "speed_multiplier": 1.3,
+          "start_distance": 9,
+          "stop_distance": 3,
+          "can_teleport": true,
+          "ignore_vibration": true
+        },
+        "minecraft:behavior.owner_hurt_by_target": {
+          "priority": 1
+        },
+        "minecraft:behavior.owner_hurt_target": {
+          "priority": 2
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "glc_lantern",
+          "lantern_green",
+          "mob"
+        ]
+      },
+      "minecraft:health": {
+        "value": 60,
+        "max": 60
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.8
+      },
+      "minecraft:movement": {
+        "value": 0.3
+      },
+      "minecraft:flying_speed": {
+        "value": 0.16
+      },
+      "minecraft:navigation.hover": {
+        "can_path_over_water": true,
+        "can_sink": false,
+        "can_pass_doors": true,
+        "can_path_from_air": true,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "avoid_sun": false
+      },
+      "minecraft:movement.hover": {},
+      "minecraft:can_fly": {},
+      "minecraft:jump.static": {},
+      "minecraft:physics": {
+        "has_gravity": false
+      },
+      "minecraft:follow_range": {
+        "value": 32
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:shooter": {
+        "def": "glc:energy_bolt"
+      },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
+      "minecraft:behavior.ranged_attack": {
+        "priority": 3,
+        "speed_multiplier": 1.15,
+        "burst_shots": 2,
+        "burst_interval": 0.25,
+        "attack_interval": {
+          "min": 1.2,
+          "max": 2.2
+        },
+        "attack_range": {
+          "min": 0.0,
+          "max": 18.0
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 4,
+        "must_see": true,
+        "reselect_targets": true,
+        "within_radius": 22,
+        "entity_types": [
+          {
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "value": "monster"
+            },
+            "max_dist": 22
+          }
+        ]
+      },
+      "minecraft:behavior.random_hover": {
+        "priority": 9,
+        "xz_dist": 8,
+        "y_dist": 4,
+        "y_offset": -1,
+        "interval": 1,
+        "hover_height": [
+          1,
+          4
+        ]
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 10,
+        "look_distance": 8
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 11
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:nameable": {
+        "always_show": true,
+        "allow_name_tag_renaming": false
+      },
+      "minecraft:persistent": {},
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.4
+      },
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "on_interact": {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "player"
+              },
+              "event": "glc:npc_interact",
+              "target": "self"
+            },
+            "interact_text": "action.interact.glc.talk"
+          }
+        ]
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+        "default_values": {
+          "max_optimized_distance": 80.0,
+          "max_dropped_ticks": 0,
+          "use_motion_prediction_hints": true
+        }
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "fall",
+            "deals_damage": "no"
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "player"
+              }
+            },
+            "deals_damage": "no"
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "glc_lantern"
+              }
+            },
+            "deals_damage": "no"
+          }
+        ]
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "all_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "player"
+              },
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "glc_lantern"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "events": {
+      "glc:despawn": {
+        "add": {
+          "component_groups": [
+            "glc:despawn"
+          ]
+        }
+      },
+      "glc:npc_interact": {},
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "glc:wild"
+          ]
+        }
+      },
+      "glc:on_tame": {
+        "remove": {
+          "component_groups": [
+            "glc:wild"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "glc:tamed"
+          ]
+        }
+      }
+    }
+  }
+}
